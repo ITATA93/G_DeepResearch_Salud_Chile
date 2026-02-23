@@ -57,7 +57,9 @@
             "gemini_config": {
                 "model": "pro",
                 "thinking_mode": true
-            }
+            },
+            "id": "code-analyst",
+            "vendor_preference": "gemini"
         },
         {
             "name": "doc-writer",
@@ -85,7 +87,9 @@
             },
             "gemini_config": {
                 "model": "flash"
-            }
+            },
+            "id": "doc-writer",
+            "vendor_preference": "gemini"
         },
         {
             "name": "code-reviewer",
@@ -117,7 +121,9 @@
             "gemini_config": {
                 "model": "pro",
                 "thinking_mode": true
-            }
+            },
+            "id": "code-reviewer",
+            "vendor_preference": "claude"
         },
         {
             "name": "test-writer",
@@ -148,7 +154,9 @@
             },
             "gemini_config": {
                 "model": "pro"
-            }
+            },
+            "id": "test-writer",
+            "vendor_preference": "gemini"
         },
         {
             "name": "db-analyst",
@@ -179,7 +187,9 @@
             "gemini_config": {
                 "model": "pro",
                 "thinking_mode": true
-            }
+            },
+            "id": "db-analyst",
+            "vendor_preference": "claude"
         },
         {
             "name": "deployer",
@@ -207,7 +217,9 @@
             },
             "gemini_config": {
                 "model": "pro"
-            }
+            },
+            "id": "deployer",
+            "vendor_preference": "gemini"
         },
         {
             "name": "researcher",
@@ -241,39 +253,41 @@
             "gemini_config": {
                 "model": "pro",
                 "thinking_mode": true
-            }
+            },
+            "id": "researcher",
+            "vendor_preference": "codex"
         }
     ],
     "name": "g_deepresearch_salud_chile_subagents",
     "teams": {
         "full-audit": {
             "agents": [
-                "reviewer",
-                "lead-orchestrator"
+                "code-reviewer",
+                "code-analyst"
             ],
             "mode": "sequential",
             "use_case": "Full project audit with orchestrator oversight"
         },
         "code-and-review": {
             "agents": [
-                "domain-builder",
-                "reviewer"
+                "code-analyst",
+                "code-reviewer"
             ],
             "mode": "sequential",
             "use_case": "Generate code then review for quality and security"
         },
         "research-and-document": {
             "agents": [
-                "deep-researcher",
-                "support"
+                "researcher",
+                "doc-writer"
             ],
             "mode": "sequential",
             "use_case": "Research a topic then document findings"
         },
         "adversarial-review": {
             "agents": [
-                "domain-builder",
-                "skeptic"
+                "code-analyst",
+                "code-reviewer"
             ],
             "mode": "sequential",
             "context_isolation": true,
