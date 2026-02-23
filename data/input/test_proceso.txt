@@ -1,0 +1,4 @@
+Proceso de Vacunación - Campaña Influenza 2026
+1. Recepción de vacunas en cadena de frio.
+2. Registro en sistema RNI.
+3. Distribución a vacunatorios.

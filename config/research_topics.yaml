@@ -1,0 +1,69 @@
+# Research Topics Configuration
+# Used by /deep-research-update workflow
+# Schedule: check last_researched vs interval_days
+
+topics:
+  - name: "Normas Generales Técnicas MINSAL"
+    slug: normas-minsal
+    focus: "Nuevas normas técnicas, guías clínicas, resoluciones exentas"
+    keywords:
+      - "norma general técnica"
+      - "guía clínica MINSAL"
+      - "resolución exenta salud"
+    sources:
+      - "minsal.cl"
+      - "bcn.cl"
+    interval_days: 30
+    last_researched: null
+
+  - name: "FONASA Aranceles y Programas"
+    slug: fonasa-aranceles
+    focus: "Actualizaciones de aranceles, nuevos programas de cobertura, GES/AUGE"
+    keywords:
+      - "arancel FONASA"
+      - "GES garantías explícitas"
+      - "AUGE"
+      - "programa cobertura salud"
+    sources:
+      - "fonasa.cl"
+      - "supersalud.gob.cl"
+    interval_days: 30
+    last_researched: null
+
+  - name: "ISP Regulaciones"
+    slug: isp-regulaciones
+    focus: "Registro de dispositivos médicos, regulación de fármacos, alertas sanitarias"
+    keywords:
+      - "ISP registro sanitario"
+      - "alerta sanitaria Chile"
+      - "dispositivo médico regulación"
+    sources:
+      - "ispch.cl"
+    interval_days: 60
+    last_researched: null
+
+  - name: "Superintendencia de Salud Circulares"
+    slug: supersalud-circulares
+    focus: "Circulares normativas, fiscalización ISAPRE, derechos pacientes"
+    keywords:
+      - "circular superintendencia salud"
+      - "fiscalización ISAPRE"
+      - "derechos paciente Chile"
+    sources:
+      - "supersalud.gob.cl"
+    interval_days: 30
+    last_researched: null
+
+  - name: "Ley 21.180 Transformación Digital"
+    slug: ley-21180-digital
+    focus: "Implementación de la ley de transformación digital del Estado en salud"
+    keywords:
+      - "Ley 21.180"
+      - "transformación digital estado"
+      - "interoperabilidad salud"
+      - "FHIR Chile"
+    sources:
+      - "digital.gob.cl"
+      - "minsal.cl"
+    interval_days: 60
+    last_researched: null

@@ -1,0 +1,20 @@
+# Core
+langchain
+langchain-community
+langchain-core
+
+# Free Search Tools
+duckduckgo-search
+
+# Document Processing (Scraping & PDF)
+beautifulsoup4
+trafilatura
+pypdf
+html2text
+
+# Data Validation
+pydantic>=2.0
+pydantic-settings>=2.0
+
+# Logging
+structlog

@@ -1,0 +1,169 @@
+{
+  "$schema": "./schema.json",
+  "version": "2.1",
+  "project": "antigravity-workspace",
+  "description": "Sub-agent configuration with multi-vendor support (Gemini, Claude, Codex)",
+  "vendors": {
+    "available": ["gemini", "claude", "codex"],
+    "default": "gemini",
+    "codex_partial": true,
+    "codex_capabilities": {
+      "mcp": true,
+      "skills": true,
+      "web_search": true,
+      "task_tool": false,
+      "note": "Full featured except Task tool (no parallel subagents)"
+    }
+  },
+  "trigger_resolution": {
+    "strategy": "priority",
+    "note": "When multiple agents match, highest priority (lowest number) wins. If tie, first in list.",
+    "conflict_examples": {
+      "audit code": "code-reviewer (priority 2) beats code-analyst (priority 3)",
+      "documentation": "researcher (priority 1) for external docs, doc-writer (priority 4) for project docs"
+    }
+  },
+  "agents": [
+    {
+      "name": "code-analyst",
+      "vendor": "gemini",
+      "supported_vendors": ["gemini", "claude", "codex"],
+      "scope": "project",
+      "priority": 3,
+      "triggers": ["analyze", "explain", "how works", "structure", "architecture"],
+      "instructions": "Analyze code and architecture. Read-only, never modify.",
+      "codex_config": {
+        "effort": "high",
+        "sequential_warning": true
+      },
+      "claude_config": {
+        "model": "sonnet",
+        "allow_parallel": true
+      },
+      "gemini_config": {
+        "model": "pro",
+        "thinking_mode": true
+      }
+    },
+    {
+      "name": "doc-writer",
+      "vendor": "gemini",
+      "supported_vendors": ["gemini", "claude", "codex"],
+      "scope": "project",
+      "priority": 4,
+      "triggers": ["document", "README", "CHANGELOG", "DEVLOG", "docs"],
+      "instructions": "Maintain documentation. Read before modifying. Never delete existing content.",
+      "codex_config": {
+        "effort": "medium"
+      },
+      "claude_config": {
+        "model": "sonnet"
+      },
+      "gemini_config": {
+        "model": "flash"
+      }
+    },
+    {
+      "name": "code-reviewer",
+      "vendor": "claude",
+      "supported_vendors": ["gemini", "claude", "codex"],
+      "scope": "project",
+      "priority": 2,
+      "triggers": ["review", "audit", "bugs", "security", "code quality"],
+      "instructions": "Review code for bugs and security. Report only, never modify.",
+      "codex_config": {
+        "effort": "high",
+        "sequential_warning": true,
+        "note": "Reviews executed in 3 sequential passes: security, logic, style"
+      },
+      "claude_config": {
+        "model": "opus",
+        "allow_parallel": true
+      },
+      "gemini_config": {
+        "model": "pro",
+        "thinking_mode": true
+      }
+    },
+    {
+      "name": "test-writer",
+      "vendor": "gemini",
+      "supported_vendors": ["gemini", "claude", "codex"],
+      "scope": "project",
+      "priority": 5,
+      "triggers": ["test", "coverage", "pytest", "jest", "unit test", "integration test"],
+      "instructions": "Create tests. Use mocks for external dependencies. Never use real data.",
+      "codex_config": {
+        "effort": "high",
+        "note": "Tests generated sequentially, no parallel test execution"
+      },
+      "claude_config": {
+        "model": "sonnet",
+        "allow_parallel": true
+      },
+      "gemini_config": {
+        "model": "pro"
+      }
+    },
+    {
+      "name": "db-analyst",
+      "vendor": "claude",
+      "supported_vendors": ["gemini", "claude", "codex"],
+      "scope": "project",
+      "priority": 6,
+      "triggers": ["database", "SQL", "query", "schema", "migration", "optimize"],
+      "instructions": "Database analysis. NEVER execute DELETE/DROP/UPDATE without confirmation.",
+      "codex_config": {
+        "effort": "xhigh",
+        "sequential_warning": true
+      },
+      "claude_config": {
+        "model": "opus"
+      },
+      "gemini_config": {
+        "model": "pro",
+        "thinking_mode": true
+      }
+    },
+    {
+      "name": "deployer",
+      "vendor": "gemini",
+      "supported_vendors": ["gemini", "claude", "codex"],
+      "scope": "project",
+      "priority": 7,
+      "triggers": ["deploy", "docker", "CI/CD", "kubernetes", "github actions"],
+      "instructions": "Deployment configuration. Never include secrets in files.",
+      "codex_config": {
+        "effort": "high"
+      },
+      "claude_config": {
+        "model": "sonnet"
+      },
+      "gemini_config": {
+        "model": "pro"
+      }
+    },
+    {
+      "name": "researcher",
+      "vendor": "codex",
+      "supported_vendors": ["gemini", "claude", "codex"],
+      "scope": "global",
+      "priority": 1,
+      "triggers": ["research", "investigate", "find docs", "documentation", "best practices", "API reference", "official docs"],
+      "instructions": "Deep research for documentation, APIs, best practices. Always cite sources. Read-only, never modify files.",
+      "codex_config": {
+        "effort": "xhigh",
+        "deep_research": true,
+        "note": "Uses Codex deep-research mode with full citations"
+      },
+      "claude_config": {
+        "model": "opus",
+        "allow_parallel": true
+      },
+      "gemini_config": {
+        "model": "pro",
+        "thinking_mode": true
+      }
+    }
+  ]
+}

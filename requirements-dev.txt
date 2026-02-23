@@ -1,0 +1,4 @@
+# Dev Dependencies
+pytest>=7.0
+pytest-cov
+pytest-asyncio
